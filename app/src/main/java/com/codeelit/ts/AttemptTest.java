@@ -153,21 +153,25 @@ public class AttemptTest extends AppCompatActivity {
     }
 
 
-
     void setNextPrevButton(int pos) {
         if (pos == 0) {
-
+            prev.setBackground(getResources().getDrawable(R.drawable.prev_gray));
+            prev.setVisibility(View.GONE);
             prev.setText("");
         } else {
-            prev.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+            prev.setBackground(getResources().getDrawable(R.drawable.prev_blue));
+            prev.setVisibility(View.VISIBLE);
             prev.setText("Previous");
+
         }
         if (pos == questions.size() - 1) {
             next.setText("Submit");
-            next.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+            next.setVisibility(View.VISIBLE);
+            next.setBackground(getResources().getDrawable(R.drawable.next_red));
         } else {
             next.setText("Next");
-            next.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+            next.setVisibility(View.VISIBLE);
+            next.setBackground(getResources().getDrawable(R.drawable.next_blue));
         }
     }
 
@@ -273,7 +277,9 @@ public class AttemptTest extends AppCompatActivity {
                         answers[position] = "C";
                     } else if (i == R.id.radioButton4) {
                         answers[position] = "D";
-                    } else {answers[position]=null;}
+                    } else {
+                        answers[position] = null;
+                    }
                     popGrid.notifyDataSetChanged();
                 }
             });
@@ -349,7 +355,8 @@ public class AttemptTest extends AppCompatActivity {
             } else convertView = view;
             if (answers[i] != null)
                 ((Button) convertView).setBackgroundColor(getResources().getColor(R.color.green));
-            else  {
+
+            else {
                 ((Button) convertView).setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
                 Log.e("The read success: ", "Worst code");
             }
@@ -357,7 +364,7 @@ public class AttemptTest extends AppCompatActivity {
             ((Button) convertView).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //setNextPrevButton(i);
+                    setNextPrevButton(i);
                     scrollView.smoothScrollToPosition(i);
                 }
             });

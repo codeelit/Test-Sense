@@ -1,5 +1,6 @@
 package com.codeelit.ts;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.codeelit.ts.Fragments.HomeFragment;
 import com.codeelit.ts.Fragments.LearnFragment;
 import com.codeelit.ts.Fragments.PracticeFragment;
 import com.codeelit.ts.Fragments.PracticeHome;
+import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 PracticeFragment fragment2= new PracticeFragment();
                                 FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
                                 ft2.replace(R.id.fragment_container, fragment2, "");
+                                ft2.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
                                 ft2.commit();
                                 return true;
                             case R.id.companies:
@@ -91,11 +94,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    @Override
+    @SuppressLint("WrongConstant")
     public void onBackPressed() {
+        new BottomDialog.Builder(this)
+                .setTitle("Exit Dialog !")
+                .setContent("Are you sure do want to Exit?")
+                .setPositiveText("OK")
+                .setNegativeText("CANCEL")
+                .setPositiveBackgroundColorResource(R.color.colorPrimary)
+                //.setPositiveBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary)
+                .setPositiveTextColorResource(android.R.color.white)
+                .setNegativeTextColor(R.color.red)
+                //.setPositiveTextColor(ContextCompat.getColor(this, android.R.color.colorPrimary)
+                .onPositive(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(BottomDialog dialog) {
+                        finish();
+                    }
+                })
+                .onNegative(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(BottomDialog dialog) {
+                    }
+                })
 
-        super.onBackPressed();
-
+                .show();
+        return;
     }
 
     @Override
@@ -140,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FirebaseAuth.getInstance().signOut();
             Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(loginActivity);
+            overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
             finish();
         } else if (id == R.id.learn) {
             getSupportActionBar().setTitle("Learn");

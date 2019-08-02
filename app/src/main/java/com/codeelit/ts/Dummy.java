@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,9 +36,11 @@ public class Dummy extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private ProgressBar progressBar;
+    private ProgressDialog progressDialog;
     private ListView listView;
     private TestAdapter testAdapter;
     ArrayList<Test> tests=new ArrayList<>();
+    Context getContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

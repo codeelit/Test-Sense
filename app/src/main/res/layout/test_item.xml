@@ -24,7 +24,7 @@
             android:layout_toEndOf="@+id/item_imageView"
             android:layout_marginLeft="4dp"
             android:fontFamily="@font/mm"
-            android:textStyle="bold"
+            android:textAllCaps="true"
             android:gravity="center_vertical|center_horizontal"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -37,13 +37,13 @@
 
         <Button
             android:id="@+id/item_button"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_margin="5dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="16dp"
             android:textAllCaps="false"
-            android:background="@drawable/btn_gradient_style"
+            android:background="@color/blue"
             android:fontFamily="@font/mm"
             android:gravity="center"
             android:textColor="@color/white" />

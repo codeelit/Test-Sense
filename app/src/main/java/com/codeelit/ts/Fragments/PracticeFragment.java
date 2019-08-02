@@ -3,9 +3,12 @@ package com.codeelit.ts.Fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codeelit.ts.Adapter.MyAdapter;
+import com.codeelit.ts.Dummy;
 import com.codeelit.ts.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,14 +34,9 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class PracticeFragment extends Fragment {
-    private ProgressDialog progressDialog;
-    RecyclerView recyclerView;
-    private Activity mActivity;
-    MyAdapter myAdapter;
-    ArrayList<String> list=new  ArrayList<String>();
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("basic aptitude");;
+    private CardView cd1, cd2, cd3, cd4, cd5;
+    FragmentTransaction ft;
 
     public PracticeFragment() {
         // Required empty public constructor
@@ -50,50 +49,23 @@ public class PracticeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_practice, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        progressDialog = new ProgressDialog(getContext());
+        cd1 = view.findViewById(R.id.basic_aptitude);
+        cd2 = view.findViewById(R.id.advance_aptitude);
+        cd3 = view.findViewById(R.id.technical_aptitude);
+        cd4 = view.findViewById(R.id.beginners_prog);
+        cd5 = view.findViewById(R.id.advance_prog);
 
-
-
-
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
+        cd1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Log.e("Count ", "" + dataSnapshot.getChildrenCount());
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String name = postSnapshot.getKey();
-                    Log.e("Get Data", name);
-                    list.add(name);
-                }
-
-                myAdapter = new MyAdapter(getContext(), list);
-                recyclerView.setAdapter(myAdapter);
-                progressDialog.dismiss();
-            }
-
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Dummy.class);
+                startActivity(intent);
             }
         });
 
         return view;
-    }
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        progressDialog.setMessage("Loading Tests...");
-        progressDialog.show();
 
     }
+
 
 }
