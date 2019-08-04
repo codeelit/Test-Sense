@@ -13,18 +13,16 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="ExploreDetailTrackTitleCollapsed">
-        <item name="android:textSize">18sp</item>
-        <item name="android:color">@color/white</item>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/fibra_one_bold</item>
     </style>
 
-    <style name="ExploreDetailTrackTitleExpanded">
-        <item name="android:textSize">24sp</item>
-        <item name="android:color">@color/white</item>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/fibra_one_bold</item>
     </style>
 
     <style name="CustomProgressBar" parent="android:Widget.ProgressBar.Horizontal">
@@ -32,6 +30,174 @@
         <item name="android:progressDrawable">@drawable/custom_progress_bar_horizontal</item>
         <item name="android:minHeight">10dip</item>
         <item name="android:maxHeight">20dip</item>
+    </style>
+
+    <style name="EditTextSignUp">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/night_700</item>
+        <item name="android:textColorHint">@color/fog_100</item>
+        <item name="android:background">@drawable/edit_text_authentication_background</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_marginBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:fontFamily">@font/fibra_one_bold</item>
+        <item name="android:layout_marginEnd">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">left|center_horizontal|clip_horizontal</item>
+        <item name="android:background">@drawable/button_background_selector</item>
+        <item name="android:paddingLeft">@dimen/button_padding_start</item>
+        <item name="android:paddingTop">@dimen/button_padding_top</item>
+        <item name="android:paddingRight">@dimen/button_padding_end</item>
+        <item name="android:paddingBottom">@dimen/button_padding_bottom</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">@font/fibra_one_bold</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:letterSpacing">0.06</item>
+    </style>
+
+    <style name="TextTrackOverviewToolbar">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:fontFamily">@font/fibra_one_semibold</item>
+    </style>
+
+    <style name="TextTrackOverviewToolbarExpanded">
+        <item name="android:textColor">@color/transparent</item>
+    </style>
+
+    <style name="MimoProgressBarRightRounded">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:progressDrawable">@drawable/progress_bar_mimo_right_rounded</item>
+    </style>
+
+    <style name="TextCourseInformation">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/fog_500</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">@font/fibra_one_regular</item>
+    </style>
+
+    <style name="TextCourseOverviewTitle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/night_700</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:fontFamily">@font/fibra_one_semibold</item>
+    </style>
+
+    <style name="TextCourseSummary">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/fog_500</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+        <item name="android:fontFamily">@font/fibra_one_regular</item>
+    </style>
+
+    <style name="TextCourseTitle">
+        <item name="android:textSize">23sp</item>
+    </style>
+
+    <style name="ImageViewFreeTrialItems">
+        <item name="android:background">@drawable/background_circular_clear_blue</item>
+        <item name="android:padding">6dp</item>
+        <item name="android:tint">@color/white</item>
+    </style>
+
+    <style name="ExploreListTrackTitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/night_300</item>
+        <item name="android:fontFamily">@font/fibra_one_bold</item>
+    </style>
+
+    <style name="ExploreListTrackDescription">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/fog_500</item>
+        <item name="android:fontFamily">@font/fibra_one_regular</item>
+    </style>
+
+    <style name="TextNewContent">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/bg_new_content</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">@font/fibra_one_heavy</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+    </style>
+
+    <style name="TextNewContent.WhiteBorder">
+        <item name="android:background">@drawable/bg_new_content_bordered</item>
+    </style>
+
+    <style name="TextCourseContentItemChapter">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/night_100</item>
+        <item name="android:fontFamily">@font/fibra_one_bold</item>
+    </style>
+
+    <style name="TextCourseContentItemTitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/night_100</item>
+        <item name="android:fontFamily">@font/fibra_one_regular</item>
+    </style>
+
+    <style name="TextCourseContentItemProgress">
+        <item name="android:textColor">@color/night_100</item>
+        <item name="android:fontFamily">@font/fibra_one_regular</item>
+    </style>
+
+    <style name="TextXpExplanationTitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/night_500</item>
+        <item name="android:fontFamily">@font/fibra_one_bold</item>
+        <item name="android:letterSpacing">@null</item>
+        <item name="lineHeight">24dp</item>
+    </style>
+
+    <style name="TextXpExplanationDescription">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/fog_500</item>
+        <item name="android:fontFamily">@font/fibra_one_regular</item>
+    </style>
+
+    <style name="TextExploreCategorCollapsedItem">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/fibra_one_bold</item>
+    </style>
+
+    <style name="ExploreDetailAddButtonText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">@font/fibra_one_bold</item>
+    </style>
+
+    <style name="ExploreFeaturedItemLabelNew">
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="ExploreFeaturedItemTrackTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/fibra_one_bold</item>
+        <item name="lineHeight">28sp</item>
+    </style>
+
+    <style name="ExploreFeaturedItemTrackDescription">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:fontFamily">@font/fibra_one_regular</item>
+        <item name="lineHeight">17sp</item>
     </style>
 
 </resources>

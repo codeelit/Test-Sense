@@ -1,112 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#ffffff"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/background_gradient" />
 
-        <ImageView
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/hw1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1.3"
+                android:layout_columnWeight="1.3"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="6dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:background="@drawable/goal_2_2"
+                    android:scaleType="centerCrop" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginRight="60dp"
+                    android:background="@drawable/curriculum"
+                    android:scaleType="fitXY" />
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/background_white"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Email Address"
-            android:textColor="@color/black"
-            android:fontFamily="@font/mm"/>
-
-        <EditText
-            android:id="@+id/atvEmailRes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableRight="@drawable/icon_person"
-            android:drawablePadding="20dp"
-            android:hint="name@gmail.com" />
-
-        <Button
-            android:id="@+id/btnReset"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rec_gradient"
-            android:text="Reset Password"
-            android:fontFamily="@font/mm"
-            android:textAllCaps="false"
-            android:textColor="#FFF" />
-
-        <TextView
-            android:id="@+id/tvGoBack"
-            android:fontFamily="@font/mm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="Go back to Sign In."
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/ivLogLogo"
-        android:layout_width="85dp"
-        android:layout_height="85dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/background_white"
-        android:padding="5dp"
-        android:src="@drawable/main_logo" />
-
-    <TextView
-        android:id="@+id/pwr_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ivLogLogo"
-        android:layout_centerHorizontal="true"
-        android:text="Password Reset"
-        android:textColor="#FFF"
-        android:fontFamily="@font/mm"
-        android:layout_marginTop="10dp"
-        android:textSize="25sp" />
-
-    <TextView
-        android:id="@+id/tvPWinfo"
-        android:fontFamily="@font/mm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/pwr_title"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="20dp"
-        android:text="You will receive an email with instructions on resetting password."
-        android:textAlignment="center"
-        android:textSize="16sp"
-        android:textColor="@color/white" />
-</RelativeLayout>
+</ScrollView>

@@ -1,8 +1,45 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">14dp</dimen>
+    <dimen name="activity_vertical_margin">8dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
+
+    <dimen name="authentication_email_top_bar_margin_horizontal">0dp</dimen>
+    <dimen name="authentication_email_top_bar_margin_top">0dp</dimen>
+    <dimen name="on_boarding_headline_font_size">24sp</dimen>
+    <dimen name="authentication_email_headline_margin_top">12dp</dimen>
+    <dimen name="action_bar_size">16dp</dimen>
+
+    <dimen name="button_margin_horizontal">16dp</dimen>
+    <dimen name="button_padding_bottom">16dp</dimen>
+    <dimen name="button_padding_end">48dp</dimen>
+    <dimen name="button_padding_start">48dp</dimen>
+    <dimen name="button_padding_top">16dp</dimen>
+    <dimen name="authentication_container_size">450dp</dimen>
+    <dimen name="authentication_email_box_margin_bottom">8dp</dimen>
+    <dimen name="authentication_email_container_margin_vertical">32dp</dimen>
+    <dimen name="authentication_email_headline_margin_bottom">62dp</dimen>
+
+    <dimen name="authentication_facebook_margin_top">16dp</dimen>
+    <dimen name="authentication_google_margin_top">8dp</dimen>
+    <dimen name="authentication_headline_margin_top">18dp</dimen>
+    <dimen name="authentication_image_margin_bottom">32dp</dimen>
+    <dimen name="authentication_image_margin_top">32dp</dimen>
+    <dimen name="authentication_main_action_button_margin_top">16dp</dimen>
+
+    <dimen name="explore_collapsed_item_height">48dp</dimen>
+    <dimen name="explore_collapsed_section_items_margin">6dp</dimen>
+    <dimen name="explore_collapsed_section_rv_margin_horizontal">6dp</dimen>
+    <dimen name="explore_collapsed_section_rv_margin_top">10dp</dimen>
+    <dimen name="explore_featured_height">200dp</dimen>
+    <dimen name="explore_margin_horizontal">12dp</dimen>
+    <dimen name="explore_margin_horizontal_rv_tracks">8dp</dimen>
+    <dimen name="explore_section_collapsed_list_item_corner_radius">6dp</dimen>
+    <dimen name="exploredetail_title_expanded_margin">18dp</dimen>
+    <dimen name="item_track_margin_end">8dp</dimen>
+    <dimen name="item_main_track_margin_end">32dp</dimen>
+    <dimen name="main_tracks_size">110dp</dimen>
+    <dimen name="course_overview_list_item_horizontal_margin">16dp</dimen>
 </resources>

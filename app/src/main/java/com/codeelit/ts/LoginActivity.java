@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         login_mail = findViewById(R.id.login_mail);
         login_password = findViewById(R.id.login_password);
         loginBtn = findViewById(R.id.loginBtn);
-        signUpbtn = findViewById(R.id.signUpBtn);
+        txt_signup = findViewById(R.id.sign_up);
         initializeGUI();
 
         user = firebaseAuth.getCurrentUser();
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        signUpbtn.setOnClickListener(new View.OnClickListener() {
+        txt_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
@@ -109,9 +109,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
-                    TastyToast.makeText(getApplicationContext(), "Login Successful", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    goToMainActivity();
+                    checkEmailVerification();
+                    //TastyToast.makeText(getApplicationContext(), "Login Successful", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                    //startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    //goToMainActivity();
                 } else {
                     progressDialog.dismiss();
                     TastyToast.makeText(getApplicationContext(), "Login Unsuccessful: Please check your email i'd and password", TastyToast.LENGTH_LONG, TastyToast.ERROR);
@@ -153,10 +154,9 @@ public class LoginActivity extends AppCompatActivity {
         login_mail = findViewById(R.id.login_mail);
         login_password = findViewById(R.id.login_password);
         forgotPass = findViewById(R.id.tvForgotPass);
-        txt_signup = findViewById(R.id.txt_signup);
+        txt_signup = findViewById(R.id.sign_up);
         loginBtn = findViewById(R.id.loginBtn);
         progressDialog = new ProgressDialog(this);
-        signUpbtn = findViewById(R.id.signUpBtn);
         firebaseAuth = FirebaseAuth.getInstance();
 
     }
@@ -173,6 +173,18 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private void checkEmailVerification(){
+        FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
+        Boolean emailflag = firebaseUser.isEmailVerified();
+
+        if (emailflag){
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        }else {
+            Toast.makeText(this, "Verify your email", Toast.LENGTH_SHORT).show();
+            firebaseAuth.signOut();
+        }
     }
 
 }

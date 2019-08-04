@@ -13,4 +13,30 @@
     <color name="warning">#f44336</color>
     <color name="rec7">#fff2961f</color>
     <color name="orange">#FCA437</color>
+
+    <color name="darkGrey">#ff424242</color>
+    <color name="dark_gray">#ff585858</color>
+    <color name="dark_grey_blue_opaque">#002f3152</color>
+    <color name="facebook_blue">#ff3a579d</color>
+    <color name="fog_100">#ffd2d3da</color>
+    <color name="fog_300">#ffb0b2be</color>
+    <color name="fog_50">#ffebebee</color>
+    <color name="fog_500">#ff9798a9</color>
+    <color name="fog_700">#ff757686</color>
+    <color name="google_red">#ffea4335</color>
+    <color name="green_100">#ffaff0be</color>
+    <color name="green_300">#ff62d76b</color>
+    <color name="green_50">#ffe4fae7</color>
+    <color name="green_500">#ff32b964</color>
+    <color name="green_700">#ff0a965a</color>
+    <color name="grey">#ff7f8a8f</color>
+    <color name="night_100">#ff7a88ba</color>
+    <color name="night_300">#ff4d4d87</color>
+    <color name="night_50">#ff96bcef</color>
+    <color name="night_500">#ff3e416d</color>
+    <color name="night_700">#ff2f3152</color>
+    <color name="snow_100">#fff9fafe</color>
+    <color name="button_inactive">@color/fog_100</color>
+    <color name="button_active">@color/green_300</color>
+    <color name="transparent">#00ffffff</color>
 </resources>
