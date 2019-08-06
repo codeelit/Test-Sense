@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/logo_noshadow"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Result"></activity>
+        <activity android:name=".Result" android:launchMode="singleTop"/>
         <activity android:name=".Intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +27,7 @@
         <activity android:name=".PWresetActivity" />
         <activity android:name=".Dummy" />
         <activity android:name=".AttemptTest" />
+
     </application>
 
 </manifest>

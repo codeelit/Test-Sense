@@ -180,11 +180,14 @@ public class AttemptTest extends AppCompatActivity {
         intent.putExtra("no_of_question",questions.size());
         intent.putExtra("no_of_right_answer",score);
         Log.e("No of questions", "submit: "+ questions.size());
+        this.finish();
+        overridePendingTransition(0,0);
+
         startActivity(intent);
 
 
 
-finish();
+
     }
 
 
