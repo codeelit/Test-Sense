@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -138,18 +139,52 @@ public class AttemptTest extends AppCompatActivity {
     }
 
     void submit() {
+        ArrayList<String> wrong_Answerd_Category=new ArrayList<>();
+        ArrayList<String> right_Answerd_Category=new ArrayList<>();
+        ArrayList<String> question=new ArrayList<>();
+        ArrayList<String> explain=new ArrayList<>();
+
         int score = 0;
         for (int i = 0; i < answers.length; i++) {
             if (answers[i] != null && answers[i].equals(questions.get(i).getAnswer())) {
+                right_Answerd_Category.add(questions.get(i).getCategory());
+
                 score++;
             }
+            else {
+                wrong_Answerd_Category.add(questions.get(i).getCategory());
+                question.add(questions.get(i).getQuestion());
+                explain.add(questions.get(i).getExplain());
+            }
+            Log.e("List", "right"+right_Answerd_Category.size());
+            Log.e("List", "wrong"+wrong_Answerd_Category.size());
+
         }
         try {
             mDatabase.child("Results").child(((Test) getIntent().getExtras().get("Questions")).getName()).child(auth.getUid()).setValue(score);
         } catch (Exception e) {
             Log.e("Result Update Failed ", e.getMessage());
         }
-        finish();
+        for (int i=0;i<question.size();i++){
+            Log.e("question",i+question.get(i));
+        }
+        for (int i=0;i<explain.size();i++){
+            Log.e("explain",i+explain.get(i));
+        }
+
+        Intent intent=new Intent(AttemptTest.this,Result.class);
+        intent.putStringArrayListExtra("wrong_category",wrong_Answerd_Category);
+        intent.putStringArrayListExtra("right_category",right_Answerd_Category);
+        intent.putExtra("question",questions);
+        intent.putExtra("user_answer",answers);
+        intent.putExtra("no_of_question",questions.size());
+        intent.putExtra("no_of_right_answer",score);
+        Log.e("No of questions", "submit: "+ questions.size());
+        startActivity(intent);
+
+
+
+finish();
     }
 
 
@@ -233,7 +268,7 @@ public class AttemptTest extends AppCompatActivity {
     class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
 
         private int itemHeight;
-        private ArrayList<question> data;
+        public ArrayList<question> data;
 
         public QuestionAdapter(ArrayList<question> data) {
             this.data = data;
@@ -260,7 +295,7 @@ public class AttemptTest extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, final int position) {
+        public void onBindViewHolder(final ViewHolder holder, final int position) {
             holder.questionText.setText(data.get(position).getQuestion());
             holder.r1.setText(data.get(position).getOpt_A());
             holder.r2.setText(data.get(position).getOpt_B());
@@ -270,13 +305,13 @@ public class AttemptTest extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
                     if (i == R.id.radioButton) {
-                        answers[position] = "A";
+                        answers[position] = holder.r1.getText().toString();
                     } else if (i == R.id.radioButton2) {
-                        answers[position] = "B";
+                        answers[position] = holder.r2.getText().toString();
                     } else if (i == R.id.radioButton3) {
-                        answers[position] = "C";
+                        answers[position] = holder.r3.getText().toString();
                     } else if (i == R.id.radioButton4) {
-                        answers[position] = "D";
+                        answers[position] = holder.r4.getText().toString();
                     } else {
                         answers[position] = null;
                     }
@@ -285,13 +320,13 @@ public class AttemptTest extends AppCompatActivity {
             });
             if (answers[position] == null) {
                 holder.radioGroup.clearCheck();
-            } else if (answers[position].equals("A")) {
+            } else if (answers[position].equals(data.get(position).getAnswer())) {
                 holder.radioGroup.check(R.id.radioButton);
-            } else if (answers[position].equals("B")) {
+            } else if (answers[position].equals(data.get(position).getAnswer())) {
                 holder.radioGroup.check(R.id.radioButton2);
-            } else if (answers[position].equals("C")) {
+            } else if (answers[position].equals(data.get(position).getAnswer())) {
                 holder.radioGroup.check(R.id.radioButton3);
-            } else if (answers[position].equals("D")) {
+            } else if (answers[position].equals(data.get(position).getAnswer())) {
                 holder.radioGroup.check(R.id.radioButton4);
             }
         }
