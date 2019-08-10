@@ -6,7 +6,6 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -15,9 +14,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
-import com.codeelit.ts.LoginActivity;
 import com.codeelit.ts.R;
-import com.codeelit.ts.RegistrationActivity;
+import com.codeelit.ts.LoginDetails.RegistrationActivity;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;

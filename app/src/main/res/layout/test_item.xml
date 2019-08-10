@@ -1,52 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    android:layout_marginBottom="10dp"
+    android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:layout_marginLeft="6dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginRight="6dp"
-    android:elevation="4dp"
-    app:cardCornerRadius="10dp"
-    app:cardUseCompatPadding="true">
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_margin="@dimen/explore_collapsed_section_items_margin"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="30dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="@dimen/explore_section_collapsed_list_item_corner_radius"
+    app:cardElevation="0dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
+        android:layout_height="60dp"
+        android:background="@color/night_300">
 
         <TextView
             android:id="@+id/item_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="?android:actionBarSize"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/item_imageView"
-            android:layout_toEndOf="@+id/item_imageView"
-            android:layout_marginLeft="4dp"
-            android:fontFamily="@font/mm"
-            android:textAllCaps="true"
-            android:gravity="center_vertical|center_horizontal"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            style="@style/TextExploreCategorCollapsedItem"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:gravity="left|center_vertical|center_horizontal|center|start"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/chevron_right"
+            app:layout_constraintStart_toEndOf="@+id/view_color"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_color"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/green_300"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/item_imageView"
-            android:src="@drawable/learn"
-            android:layout_width="?android:actionBarSize"
-            android:layout_height="?android:actionBarSize" />
-
-        <Button
-            android:id="@+id/item_button"
-            android:layout_width="120dp"
+            android:id="@+id/chevron_right"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="5dp"
-            android:layout_marginRight="16dp"
-            android:textAllCaps="false"
-            android:background="@color/blue"
-            android:fontFamily="@font/mm"
-            android:gravity="center"
-            android:textColor="@color/white" />
-
-    </RelativeLayout>
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_right_icon_24_px" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
+</RelativeLayout>

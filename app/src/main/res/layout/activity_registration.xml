@@ -5,7 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationActivity">
+    tools:context=".LoginDetails.RegistrationActivity">
 
 
     <LinearLayout
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@drawable/background_gradient" />
+            android:background="@color/night_300" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -179,7 +179,7 @@
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
                     android:text=" Sign in"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/green"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 

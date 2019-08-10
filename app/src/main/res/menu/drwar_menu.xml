@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/drwar_about"
+            android:icon="@drawable/info"
+            android:title="About" />
+
+        <item
+            android:id="@+id/drwar_share"
+            android:icon="@drawable/share_round"
+            android:title="Share" />
+        <item
+            android:id="@+id/drwar_feedback"
+            android:icon="@drawable/rss"
+            android:title="Feedback" />
+    </group>
+    <group
+        android:id="@+id/menu_end"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/drwar_logout"
+            android:icon="@drawable/log_out"
+            android:title="Logout" />
+    </group>
+</menu>

@@ -45,19 +45,21 @@
                 <Button
                     android:id="@+id/prev"
                     android:layout_width="0dp"
+                    android:fontFamily="@font/fibra_one_bold"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:textColor="@color/white"
-                    android:background="@drawable/login_button_bk" />
+                    android:background="@drawable/button_background_selector" />
 
                 <Button
                     android:id="@+id/next"
                     android:layout_width="0dp"
+                    android:fontFamily="@font/fibra_one_bold"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/white"
-                    android:background="@drawable/login_button_bk" />
+                    android:background="@drawable/button_background_selector" />
             </LinearLayout>
         </RelativeLayout>
 

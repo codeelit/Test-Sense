@@ -1,16 +1,15 @@
 
-package com.codeelit.ts;
+package com.codeelit.ts.LoginDetails;
 
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,17 +19,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.codeelit.ts.MainActivity;
+import com.codeelit.ts.R;
+import com.codeelit.ts.UserProfile;
 import com.codeelit.ts.model.Student;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.core.Tag;
 import com.sdsmdg.tastytoast.TastyToast;
+
+import maes.tech.intentanim.CustomIntent;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -60,10 +62,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
         if(user != null) {
             finish();
-            startActivity(new Intent(RegistrationActivity.this,MainActivity.class));
+            startActivity(new Intent(RegistrationActivity.this, com.codeelit.ts.MainActivity.class));
         }
 
         signup.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
             @Override
             public void onClick(View view) {
 
@@ -72,9 +75,21 @@ public class RegistrationActivity extends AppCompatActivity {
                 final String inputEmail = email.getText().toString().trim();
                 final String inputCollege = college.getText().toString().trim();
 
+
+                if (TextUtils.isEmpty(inputName)) {
+                    Toast.makeText(RegistrationActivity.this.getApplicationContext(), "Enter username !", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(inputPw)) {
+                    Toast.makeText(RegistrationActivity.this.getApplicationContext(), "Enter password!",  Toast.LENGTH_SHORT).show();
+                } else if (inputPw.length() < 6) {
+                    Toast.makeText(RegistrationActivity.this.getApplicationContext(), "Password too short, enter minimum 6 characters!",  Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(inputEmail)){
+                    Toast.makeText(RegistrationActivity.this.getApplicationContext(), "Enter email address!",  Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(inputCollege)){
+                    Toast.makeText(RegistrationActivity.this.getApplicationContext(), "Enter college address!",  Toast.LENGTH_SHORT).show();
+                }
+
                 if (validateInput(inputName, inputPw, inputEmail, inputCollege))
                     registerUser(inputName, inputPw, inputEmail, inputCollege);
-
             }
         });
 
@@ -82,7 +97,9 @@ public class RegistrationActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+                RegistrationActivity logIn_Activity = RegistrationActivity.this;
+                logIn_Activity.startActivity(new Intent(logIn_Activity, LoginActivity.class));
+                CustomIntent.customType(RegistrationActivity.this, "right-to-left");
             }
         });
 
@@ -188,7 +205,9 @@ public class RegistrationActivity extends AppCompatActivity {
                         Toast.makeText(RegistrationActivity.this, "Registration Successful, Verification mail sent", Toast.LENGTH_LONG).show();
                         firebaseAuth.signOut();
                         finish();
-                        startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+                        RegistrationActivity logIn_Activity = RegistrationActivity.this;
+                        logIn_Activity.startActivity(new Intent(logIn_Activity, LoginActivity.class));
+                        CustomIntent.customType(RegistrationActivity.this, "up-to-bottom");
                     }else {
                         Toast.makeText(RegistrationActivity.this, "Verification mail sent is unsuccessful", Toast.LENGTH_LONG).show();
                     }

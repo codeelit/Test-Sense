@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/bottom_post_home"
+        android:icon="@drawable/ic_school_black_24dp"
+        android:title="Learn" />
+    <item
+        android:id="@+id/bottom_video"
+        android:icon="@drawable/course"
+        android:title="Practice" />
+    <item
+        android:id="@+id/bottom_companies"
+        android:icon="@drawable/ic_business_black_24dp"
+        android:title="Companies" />
+    <item
+        android:id="@+id/bottom_feed"
+        android:icon="@drawable/ic_forum_black_24dp"
+        android:title="Discussion" />
+</menu>

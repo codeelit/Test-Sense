@@ -3,13 +3,8 @@
     <corners
         android:radius="27dp"
         />
-    <gradient
-        android:angle="45"
-        android:centerX="35%"
-        android:startColor="@android:color/darker_gray"
-        android:endColor="@android:color/darker_gray"
-        android:type="linear"
-        />
+    <solid android:color="@color/grey"/>
+    <corners android:radius="4dp"/>
     <size
         android:width="182dp"
         android:height="54dp"

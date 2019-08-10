@@ -57,5 +57,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/intro_one" />
+        app:srcCompat="@drawable/one" />
 </androidx.constraintlayout.widget.ConstraintLayout>

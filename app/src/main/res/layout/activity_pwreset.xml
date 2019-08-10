@@ -4,7 +4,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PWresetActivity">
+    tools:context=".LoginDetails.PWresetActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@drawable/background_gradient" />
+            android:background="@color/night_300" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -41,10 +41,11 @@
             android:layout_marginTop="5dp"
             android:text="Email Address"
             android:textColor="@color/black"
-            android:fontFamily="@font/mm"/>
+            android:fontFamily="@font/fibra_one_bold"/>
 
         <EditText
             android:id="@+id/atvEmailRes"
+            android:fontFamily="@font/mm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/icon_person"
@@ -56,19 +57,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/rec_gradient"
+            android:background="@drawable/button_background_selector"
             android:text="Reset Password"
-            android:fontFamily="@font/mm"
+            android:fontFamily="@font/fibra_one_bold"
             android:textAllCaps="false"
             android:textColor="#FFF" />
 
         <TextView
             android:id="@+id/tvGoBack"
-            android:fontFamily="@font/mm"
+            android:fontFamily="@font/fibra_one_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:text="Go back to Sign In."
             android:textColor="@color/black" />
     </LinearLayout>
@@ -92,13 +93,13 @@
         android:layout_centerHorizontal="true"
         android:text="Password Reset"
         android:textColor="#FFF"
-        android:fontFamily="@font/mm"
+        android:fontFamily="@font/fibra_one_bold"
         android:layout_marginTop="10dp"
         android:textSize="25sp" />
 
     <TextView
         android:id="@+id/tvPWinfo"
-        android:fontFamily="@font/mm"
+        android:fontFamily="@font/fibra_one_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/pwr_title"

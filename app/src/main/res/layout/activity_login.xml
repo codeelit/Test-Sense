@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@drawable/background_gradient" />
+            android:background="@color/night_300" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -142,12 +142,21 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:text=" Sign up now"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/green"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
 
         </LinearLayout>
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btnGoogle"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </com.google.android.gms.common.SignInButton>
+
     </LinearLayout>
 
     </LinearLayout>

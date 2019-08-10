@@ -11,6 +11,8 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.codeelit.ts.LoginDetails.RegistrationActivity;
+
 public class SplashScrActivity extends AppCompatActivity {
 
     private ImageView logoSplash, chmaraTech, logoWhite;
