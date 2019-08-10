@@ -11,6 +11,9 @@
         android:icon="@drawable/course"
         android:title="Practice" />
     <item
+        android:id="@+id/bottom_nothing"
+        android:title=""/>
+    <item
         android:id="@+id/bottom_companies"
         android:icon="@drawable/ic_business_black_24dp"
         android:title="Companies" />

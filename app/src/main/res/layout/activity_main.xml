@@ -24,9 +24,9 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbarMain"
-                    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                     android:layout_width="match_parent"
-                    android:layout_height="?android:attr/actionBarSize">
+                    android:layout_height="?android:attr/actionBarSize"
+                    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -50,29 +50,38 @@
             android:layout_marginBottom="56dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="12dp"
+            android:src="@mipmap/action_add"
+            app:layout_anchor="@+id/bottom_bar_main" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/main_bottom_nav"
-            android:theme="@style/BottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@drawable/white_gray_border_bottom"
-            app:itemIconTint="@drawable/nav_item_background"
-            app:itemTextColor="@drawable/nav_item_background"
+            android:background="@android:color/transparent"
+            android:theme="@style/BottomNavigationView"
+            app:itemIconTint="@drawable/nav_icon_color"
+            app:itemTextColor="@drawable/nav_icon_color"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation" />
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottom_bar_main"
-            android:theme="@style/BottomNavigationView"
             style="@style/Widget.MaterialComponents.BottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#f5f5f5"
             android:layout_gravity="bottom"
+            android:theme="@style/BottomNavigationView"
             app:fabCradleRoundedCornerRadius="30dp" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/mainView"
@@ -91,7 +100,7 @@
             android:layout_height="match_parent"
             android:fillViewport="true"
             android:scrollbars="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"

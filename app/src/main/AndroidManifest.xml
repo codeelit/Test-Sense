@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/logo_noshadow"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Result" android:launchMode="singleTop"/>
+        <activity android:name=".Discussion.AddPostActivity"></activity>
+        <activity
+            android:name=".Result"
+            android:launchMode="singleTop" />
         <activity android:name=".Intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,14 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".practice" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".PWresetActivity" />
+        <activity android:name=".LoginDetails.RegistrationActivity" />
+        <activity android:name=".LoginDetails.LoginActivity" />
+        <activity android:name=".LoginDetails.PWresetActivity" />
         <activity android:name=".Dummy" />
         <activity android:name=".AttemptTest" />
-
     </application>
 
 </manifest>

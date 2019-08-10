@@ -18,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.codeelit.ts.Discussion.AddPostActivity;
 import com.codeelit.ts.Fragments.CompaniesFragment;
 import com.codeelit.ts.Fragments.DiscussionFragment;
 import com.codeelit.ts.Fragments.SettingsFragment;
@@ -25,6 +26,7 @@ import com.codeelit.ts.Learn.LearnFragment;
 import com.codeelit.ts.LoginDetails.LoginActivity;
 import com.codeelit.ts.Practice.PracticeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String getUserHeaderEmail;
 
     Toolbar toolbarMain;
+    FloatingActionButton fabButton;
 
     private static final String TAG ="MainActivity";
 
@@ -106,6 +109,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        fabButton = (FloatingActionButton)findViewById(R.id.fab);
+        fabButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AddPostActivity.class));
+            }
+        });
 
         this.privacy = (TextView) findViewById(R.id.privacypolicy_menu);
         this.terms = (TextView) findViewById(R.id.termsandconditionmenu);
