@@ -2,9 +2,13 @@
 package com.codeelit.ts.LoginDetails;
 
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,27 +21,40 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.codeelit.ts.MainActivity;
 import com.codeelit.ts.R;
 import com.codeelit.ts.UserProfile;
 import com.codeelit.ts.model.Student;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.sdsmdg.tastytoast.TastyToast;
 
 import maes.tech.intentanim.CustomIntent;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private ImageView logo, joinus;
-    private EditText username, email, password, college;
+    static int PReqCode = 1;
+    static int REQUESCODE = 1;
+    Uri pickedImgUri;
+
+    ImageView ImgUserPhoto;
+    ImageView image;
+    private EditText name, email, password, college;
     private Button signup;
     private TextView signin;
     private ProgressDialog progressDialog;
@@ -70,7 +87,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                final String inputName = username.getText().toString().trim();
+                final String inputName = name.getText().toString().trim();
                 final String inputPw = password.getText().toString().trim();
                 final String inputEmail = email.getText().toString().trim();
                 final String inputCollege = college.getText().toString().trim();
@@ -108,7 +125,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void initializeGUI() {
 
-        username = findViewById(R.id.atvUsernameReg);
+        name = findViewById(R.id.atvUsernameReg);
         email = findViewById(R.id.atvEmailReg);
         password = findViewById(R.id.atvPasswordReg);
         college = findViewById(R.id.atvCollegeReg);
@@ -151,7 +168,75 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    /*private void updateUserInfo(final String inputName, Uri pickedImgUri, final FirebaseUser currentUser) {
+
+        // first we need to upload user photo to firebase and get url
+        StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users_photos");
+        final StorageReference imageFilePath = mStorage.child(pickedImgUri.getLastPathSegment());
+        imageFilePath.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+
+                        //url contain user image url
+                        UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(inputName)
+                                .setPhotoUri(uri)
+                                .build();
+
+                        currentUser.updateProfile(profileUpdate)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            //sendEmailVerification();
+                                            // url info updated successfully
+                                            showMessage(" ");
+                                            CustomIntent.customType(RegistrationActivity.this, "up-to-bottom");
+                                            //updateUI();
+                                        }
+                                    }
+                                });
+                    }
+                });
+            }
+        });
+    }*/
+
+    private void updateUI() {
+        Intent homeActivity = new Intent(getApplicationContext(),LoginActivity.class);
+        startActivity(homeActivity);
+        finish();
+    }
+
+    private void showMessage(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    private void checkAndRequestForPermission() {
+        if (ContextCompat.checkSelfPermission(RegistrationActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(RegistrationActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                Toast.makeText(RegistrationActivity.this, "Please accept for required permission", Toast.LENGTH_SHORT).show();
+            } else {
+                ActivityCompat.requestPermissions(RegistrationActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        PReqCode);
+            }
+        } else {
+            openGallery();
+        }
+    }
+
+    private void openGallery() {
+        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        startActivityForResult(galleryIntent, REQUESCODE);
     }
 
     private void goToMainActivity() {
@@ -161,7 +246,6 @@ public class RegistrationActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
     }
-
 
     private void sendUserData(String username, String college) {
 
@@ -176,7 +260,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private boolean validateInput(String inName, String intPw, String inEmail, String inpCollege) {
 
         if (inName.isEmpty()) {
-            username.setError("Username is empty.");
+            name.setError("Username is empty.");
             return false;
         }
         if (intPw.isEmpty()) {
@@ -207,6 +291,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         finish();
                         RegistrationActivity logIn_Activity = RegistrationActivity.this;
                         logIn_Activity.startActivity(new Intent(logIn_Activity, LoginActivity.class));
+                        finish();
                         CustomIntent.customType(RegistrationActivity.this, "up-to-bottom");
                     }else {
                         Toast.makeText(RegistrationActivity.this, "Verification mail sent is unsuccessful", Toast.LENGTH_LONG).show();

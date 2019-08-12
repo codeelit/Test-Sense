@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    android:fitsSystemWindows="true">
 
-    <RelativeLayout
+    <com.google.android.material.appbar.AppBarLayout
+        style="@style/AppTheme.AppBarOverlay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-
-        <FrameLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/night_300">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarMain"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mainListView"
@@ -26,7 +39,5 @@
                 android:paddingBottom="8dp"
                 android:scrollbars="none"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-        </FrameLayout>
 
-    </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

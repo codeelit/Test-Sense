@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +34,9 @@ public class PracticeFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View viewItem = inflater.inflate(R.layout.fragment_learn, container, false);
+        Toolbar toolbar = (Toolbar)viewItem.findViewById(R.id.toolbarMain);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Practice");
+
         RecyclerView theListView = (RecyclerView) viewItem.findViewById(R.id.mainListView);
         theListView.setLayoutManager(new LinearLayoutManager(getContext()));
         theListView.setAdapter(new FoldingCellRecyclerAdapter(getContext(), AllLearnItem.getTestingList()));

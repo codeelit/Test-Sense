@@ -24,12 +24,12 @@
 
         <ImageView
             android:id="@+id/userImageHeader"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/main_logo"
+            android:background="@drawable/userphoto"
             android:elevation="7dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,6 @@
             android:layout_marginStart="12dp"
             android:fontFamily="@font/fibra_one_bold"
             android:text="Username"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -67,15 +66,5 @@
             app:layout_constraintTop_toBottomOf="@+id/usernameMainHead"
             app:layout_constraintVertical_bias="0.272" />
 
-        <ImageView
-            android:id="@+id/VerifiedIconHeader"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="2dp"
-            android:padding="4dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/usernameMainHead"
-            app:layout_constraintStart_toEndOf="@+id/usernameMainHead"
-            app:layout_constraintTop_toTopOf="@+id/usernameMainHead" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

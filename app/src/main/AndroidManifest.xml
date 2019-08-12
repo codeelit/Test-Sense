@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/logo_noshadow"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity" />
         <activity android:name=".Discussion.AddPostActivity"></activity>
         <activity
             android:name=".Result"
@@ -23,7 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
         <activity android:name=".LoginDetails.RegistrationActivity" />
         <activity android:name=".LoginDetails.LoginActivity" />
         <activity android:name=".LoginDetails.PWresetActivity" />

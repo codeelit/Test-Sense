@@ -1,12 +1,15 @@
 package com.codeelit.ts;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +21,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.codeelit.ts.Discussion.AddPostActivity;
 import com.codeelit.ts.Fragments.CompaniesFragment;
 import com.codeelit.ts.Fragments.DiscussionFragment;
@@ -30,6 +34,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -37,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private Button btnLogout;
     private FirebaseAuth firebaseAuth;
+    public FirebaseAuth auth;
     FirebaseUser user;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -54,7 +60,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView terms;
     DrawerLayout drawer;
 
-    TextView nav_username;
+    private String name;
+    private Uri photoUrl;
+    private ImageView mPic;
+    String user_id;
+
+    TextView usernametextview;
+    String getUserHeaderName;
     TextView userEmailHeader;
     String getUserHeaderEmail;
 
@@ -66,9 +78,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.firebaseAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_main);
         this.toolbarMain = (Toolbar) findViewById(R.id.toolbarMain);
-        setSupportActionBar(this.toolbarMain);
+        setSupportActionBar(toolbarMain);
+        getSupportActionBar().setTitle("Learn");
         this.bottomNavigationView = (BottomNavigationView) findViewById(R.id.main_bottom_nav);
         this.mainFrame = (FrameLayout) findViewById(R.id.changeFrame);
         this.learnFragment = new LearnFragment();
@@ -83,11 +97,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.bottom_post_home /*2131361888*/:
+                        getSupportActionBar().setTitle("Learn");
                         MainActivity mainActivity = MainActivity.this;
                         mainActivity.setFragment(mainActivity.learnFragment);
                         MainActivity.this.bottomNavigationView.getMenu().getItem(0).setChecked(true);
                         break;
                     case R.id.bottom_video /*2131361890*/:
+                        getSupportActionBar().setTitle("Practice");
                         MainActivity mainActivity2 = MainActivity.this;
                         mainActivity2.setFragment(mainActivity2.practiceFragment);
                         MainActivity.this.bottomNavigationView.getMenu().getItem(1).setChecked(true);
@@ -106,21 +122,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return false;
             }
         });
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-
-        fabButton = (FloatingActionButton)findViewById(R.id.fab);
-        fabButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddPostActivity.class));
-            }
-        });
-
         this.privacy = (TextView) findViewById(R.id.privacypolicy_menu);
         this.terms = (TextView) findViewById(R.id.termsandconditionmenu);
-
+        this.user_id = this.firebaseAuth.getCurrentUser().getUid();
+        this.auth = FirebaseAuth.getInstance();
         this.drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, this.drawer, this.toolbarMain, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         this.drawer.addDrawerListener(actionBarDrawerToggle);
@@ -130,12 +135,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
-        firebaseAuth = FirebaseAuth.getInstance();
+        this.usernametextview = (TextView) headerView.findViewById(R.id.usernameMainHead);
         this.userEmailHeader = (TextView) headerView.findViewById(R.id.userEmailHeader);
-        this.user = firebaseAuth.getCurrentUser();
+        this.user = FirebaseAuth.getInstance().getCurrentUser();
+        this.getUserHeaderName = this.user.getDisplayName();
+        this.usernametextview.setText(this.getUserHeaderName);
         this.getUserHeaderEmail = this.user.getEmail();
         this.userEmailHeader.setText(this.getUserHeaderEmail);
-
         /*PracticeFragment fragment1 = new PracticeFragment();
         FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
         ft1.replace(R.id.fragment_container, fragment1, "");
@@ -181,12 +187,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });*/
     }
 
+    private void getCurrentinfo() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            for (UserInfo profile : user.getProviderData()){
+                String providerId = profile.getProviderId();
+
+                String uid = profile.getUid();
+                name = profile.getDisplayName();
+                photoUrl = profile.getPhotoUrl();
+                usernametextview.setText(name);
+            }
+        }
+    }
+
 
     public void setFragment(Fragment fragment) {
         FragmentTransaction beginTransaction = getSupportFragmentManager().beginTransaction();
         beginTransaction.replace(R.id.changeFrame, fragment);
         beginTransaction.commit();
     }
+
+    /*public void updateNavHeader(){
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUserName = headerView.findViewById(R.id.nav_user_name);
+        TextView navUserMail = headerView.findViewById(R.id.nav_user_mail);
+        ImageView navUserPhot = headerView.findViewById(R.id.nav_user_photo);
+    }*/
 
     private void checkCurrentUser(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -248,6 +276,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }*/
 
     @Override
+    protected void onStart() {
+        checkUserStatus();
+        super.onStart();
+    }
+
+    private void checkUserStatus() {
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
+        } else {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
@@ -277,10 +320,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String str = "android.intent.action.SEND";
         String str2 = "left-to-right";
         switch (menuItem.getItemId()) {
+            case R.id.bottom_post_home:
+                break;
             case R.id.drwar_about /*2131361995*/:
                 break;
             case R.id.drwar_feedback /*2131361999*/:
-
                 break;
             case R.id.drwar_logout /*2131362000*/:
                 FirebaseAuth.getInstance().signOut();
@@ -295,6 +339,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.drawer.closeDrawer((int) GravityCompat.START);
         return true;
     }
-
 
 }
