@@ -39,7 +39,7 @@ public class IntroActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if (restorePrefData()){
             String action;
-            Intent mainActivity = new Intent(getApplicationContext(), RegistrationActivity.class);
+            Intent mainActivity = new Intent(this, RegistrationActivity.class);
             startActivity(mainActivity);
             finish();
         }
