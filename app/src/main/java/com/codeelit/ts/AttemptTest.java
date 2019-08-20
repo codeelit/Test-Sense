@@ -32,6 +32,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.codeelit.ts.model.ResultCategoryList;
 import com.codeelit.ts.model.Test;
 import com.codeelit.ts.model.question;
 import com.google.firebase.auth.FirebaseAuth;
@@ -139,22 +140,24 @@ public class AttemptTest extends AppCompatActivity {
     }
 
     void submit() {
-        ArrayList<String> wrong_Answerd_Category=new ArrayList<>();
-        ArrayList<String> right_Answerd_Category=new ArrayList<>();
+        ArrayList<ResultCategoryList> wrong_Answerd_Category=new ArrayList<>();
+        ArrayList<ResultCategoryList> right_Answerd_Category=new ArrayList<>();
         ArrayList<String> question=new ArrayList<>();
         ArrayList<String> explain=new ArrayList<>();
 
         int score = 0;
         for (int i = 0; i < answers.length; i++) {
             if (answers[i] != null && answers[i].equals(questions.get(i).getAnswer())) {
-                right_Answerd_Category.add(questions.get(i).getCategory());
+                ResultCategoryList resultCategoryList=new ResultCategoryList();
+                resultCategoryList.setCategory(questions.get(i).getCategory());
+                right_Answerd_Category.add(resultCategoryList);
 
                 score++;
             }
             else {
-                wrong_Answerd_Category.add(questions.get(i).getCategory());
-                question.add(questions.get(i).getQuestion());
-                explain.add(questions.get(i).getExplain());
+                ResultCategoryList resultCategoryList=new ResultCategoryList();
+                resultCategoryList.setCategory(questions.get(i).getCategory());
+                wrong_Answerd_Category.add(resultCategoryList);
             }
             Log.e("List", "right"+right_Answerd_Category.size());
             Log.e("List", "wrong"+wrong_Answerd_Category.size());
@@ -173,8 +176,8 @@ public class AttemptTest extends AppCompatActivity {
         }
 
         Intent intent=new Intent(AttemptTest.this,Result.class);
-        intent.putStringArrayListExtra("wrong_category",wrong_Answerd_Category);
-        intent.putStringArrayListExtra("right_category",right_Answerd_Category);
+        intent.putExtra("wrong_category",wrong_Answerd_Category);
+        intent.putExtra("right_category",right_Answerd_Category);
         intent.putExtra("question",questions);
         intent.putExtra("user_answer",answers);
         intent.putExtra("no_of_question",questions.size());
