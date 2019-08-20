@@ -4,6 +4,7 @@ package com.codeelit.ts.Fragments;
 import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -17,34 +18,51 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.codeelit.ts.Discussion.AdapterPosts;
 import com.codeelit.ts.Discussion.AddPostActivity;
+import com.codeelit.ts.Discussion.PostAdapter;
 import com.codeelit.ts.MainActivity;
 import com.codeelit.ts.R;
+import com.codeelit.ts.model.ModelPost;
 import com.codeelit.ts.model.Post;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -63,8 +81,14 @@ public class DiscussionFragment extends Fragment {
     private static final int PReqCode = 1;
     private static final int REQUESCODE = 1;
 
-    String[] cameraPermissions;
-    String[] storagePermissions;
+    RecyclerView recyclerView;
+    PostAdapter postAdapter;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    List<Post> postList;
+
+    //List<ModelPost> postList;
+    AdapterPosts adapterPosts;
 
     ImageView popupUserImage, popupPostImage, popupAddBtn;
     TextView popupTitle, popupDescription;
@@ -73,17 +97,6 @@ public class DiscussionFragment extends Fragment {
 
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
-    DatabaseReference userDbRef;
-    StorageReference mStorageRef;
-
-    ActionBar actionBar;
-    EditText titleEt, descriptionEt;
-    ImageView imageIv;
-    Button uploadBtn;
-
-    Uri image_uri = null;
-    String name, email, uid, dp, college;
-
 
     ProgressDialog pd;
     private Uri pickedImgUri = null;
@@ -105,6 +118,20 @@ public class DiscussionFragment extends Fragment {
         iniPopup();
         setupPopupImageClick();
 
+        recyclerView = viewItem.findViewById(R.id.postsRecyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setHasFixedSize(true);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Discussion");
+        /*Context context;
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+        recyclerView.setLayoutManager(layoutManager);*/
+
+        //postList = new ArrayList<>();
+        //loadPosts();
+
         FloatingActionButton fab = (FloatingActionButton) viewItem.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +142,75 @@ public class DiscussionFragment extends Fragment {
 
         return viewItem;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                postList = new ArrayList<>();
+                for (DataSnapshot postsnap: dataSnapshot.getChildren()){
+                    Post post = postsnap.getValue(Post.class);
+                    postList.add(post);
+                }
+                postAdapter = new PostAdapter(getActivity(), postList);
+                recyclerView.setAdapter(postAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    /*public void searchPosts(final String searchQuery){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Discussion");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                postList.clear();
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                    ModelPost modelPost = ds.getValue(ModelPost.class);
+
+                    if (!modelPost.getTitle().toLowerCase().contains(searchQuery.toLowerCase()) ||
+                            modelPost.getDescription().toLowerCase().contains(searchQuery.toLowerCase())){
+                        postList.add(modelPost);
+                    }
+                    adapterPosts = new AdapterPosts(getActivity(), postList);
+                    recyclerView.setAdapter(adapterPosts);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }*/
+
+     /*private void loadPosts() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Discussion");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                postList.clear();
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                    ModelPost modelPost = ds.getValue(ModelPost.class);
+
+                    postList.add(modelPost);
+                    adapterPosts = new AdapterPosts(getActivity(), postList);
+                    recyclerView.setAdapter(adapterPosts);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }*/
 
     private void iniPopup() {
         popAddPost = new Dialog(getActivity());
@@ -216,6 +312,36 @@ public class DiscussionFragment extends Fragment {
         Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent, REQUESCODE);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+
+        MenuItem item = menu.findItem(R.id.action_search);
+        /*SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                if (!TextUtils.isEmpty(s)){
+                    searchPosts(s);
+                }else {
+                    loadPosts();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if (!TextUtils.isEmpty(s)){
+                    searchPosts(s);
+                }else {
+                    loadPosts();
+                }
+                return false;
+            }
+        });*/
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void addPost(Post post) {

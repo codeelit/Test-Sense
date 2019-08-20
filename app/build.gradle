@@ -39,6 +39,8 @@ dependencies {
     implementation 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
     implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
     implementation 'com.github.hajiyevelnur92:intentanimation:1.0'
+    implementation 'com.github.mohammadatif:CircularImageView:1.0.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'com.android.support:appcompat-v7:29.0.0'
     implementation 'com.android.support:design:29.0.0'

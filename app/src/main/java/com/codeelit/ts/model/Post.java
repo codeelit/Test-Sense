@@ -46,7 +46,6 @@ public class Post {
         return userId;
     }
 
-
     public Object getTimeStamp() {
         return timeStamp;
     }
