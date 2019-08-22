@@ -33,7 +33,7 @@ public class PracticeFragment extends Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View viewItem = inflater.inflate(R.layout.fragment_learn, container, false);
+        View viewItem = inflater.inflate(R.layout.fragment_all_course, container, false);
         Toolbar toolbar = (Toolbar)viewItem.findViewById(R.id.toolbarMain);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Practice");
 

@@ -9,21 +9,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codeelit.ts.model.question;
-
-
 import java.util.ArrayList;
 import java.util.List;
-
-import lecho.lib.hellocharts.model.PieChartData;
-import lecho.lib.hellocharts.model.SliceValue;
-import lecho.lib.hellocharts.view.PieChartView;
 
 public class Result extends AppCompatActivity {
     TextView question;
     TextView explain;
     TextView noofq;
     TextView right;
-    PieChartView pieChartView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
