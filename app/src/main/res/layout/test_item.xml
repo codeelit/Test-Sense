@@ -23,7 +23,6 @@
     app:cardCornerRadius="@dimen/explore_section_collapsed_list_item_corner_radius"
     app:cardElevation="0dp">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"

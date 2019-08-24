@@ -4,8 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <GridLayout
         android:id="@+id/grid_layout"
@@ -54,7 +63,7 @@
                             android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="10dp"
-                            android:src="@drawable/kt_aim" />
+                            android:src="@drawable/basics" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -97,7 +106,7 @@
                             android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="10dp"
-                            android:src="@drawable/kt_aim" />
+                            android:src="@drawable/advance" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -149,7 +158,7 @@
                             android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="10dp"
-                            android:src="@drawable/kt_aim" />
+                            android:src="@drawable/technical" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -197,7 +206,7 @@
                             android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="10dp"
-                            android:src="@drawable/kt_aim" />
+                            android:src="@drawable/beginners" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -255,7 +264,7 @@
                             android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="10dp"
-                            android:src="@drawable/kt_aim" />
+                            android:src="@drawable/advances" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -298,7 +307,7 @@
                             android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="10dp"
-                            android:src="@drawable/kt_aim" />
+                            android:src="@drawable/soon" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -324,4 +333,5 @@
 
         </LinearLayout>
     </GridLayout>
+    </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

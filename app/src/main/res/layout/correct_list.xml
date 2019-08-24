@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item_cardview"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="wrap_content"
     android:layout_margin="@dimen/explore_collapsed_section_items_margin"
     android:layout_marginLeft="5dp"
     android:layout_marginTop="10dp"
@@ -17,25 +17,23 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@color/night_300">
-
-
 
 
         <TextView
             android:id="@+id/correct_list_answer"
-android:text="Title"
+            android:text="Title"
             style="@style/TextExploreCategorCollapsedItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:gravity="center_vertical|center_horizontal|center"
-            android:textSize="20sp"
+            android:layout_marginStart="15dp"
+            android:gravity="center"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-
             app:layout_constraintStart_toEndOf="@+id/imageIv"
             app:layout_constraintTop_toTopOf="parent"  />
+
         <View
             android:id="@+id/imageIv"
             android:layout_width="8dp"

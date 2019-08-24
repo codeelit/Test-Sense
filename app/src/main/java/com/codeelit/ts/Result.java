@@ -1,6 +1,7 @@
 package com.codeelit.ts;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,45 +9,32 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.codeelit.ts.ShowAnswer.ShowAnswers;
 import com.codeelit.ts.model.ResultCategoryList;
+import com.codeelit.ts.model.Test;
 import com.codeelit.ts.model.question;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-
 import java.util.ArrayList;
-import java.util.List;
-
-import lecho.lib.hellocharts.model.PieChartData;
-import lecho.lib.hellocharts.model.SliceValue;
-import lecho.lib.hellocharts.view.PieChartView;
 
 
 public class Result extends AppCompatActivity {
-    TextView question;
-    TextView explain;
-    TextView noofq;
-    TextView right;
-    ListView listView;
-    PieChartView pieChartView;
+    TextView no_of_questions, correct_answers, wrong_answers;
     Button mShowAnswer;
     private ArrayList<ResultCategoryList> m_correct_list = new ArrayList<>();
 
     RecyclerView recyclerView_correct;
-    RecyclerView recyclerView_wrong;
-    ResultCategoryAdapter resultCategoryAdapter;
-
     private DatabaseReference mDatabase;
     private FirebaseAuth auth;
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +42,14 @@ public class Result extends AppCompatActivity {
         setContentView(R.layout.activity_result);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView_correct = (RecyclerView) findViewById(R.id.recyclerView_right);
         mShowAnswer = findViewById(R.id.show_answers);
+        no_of_questions = findViewById(R.id.no_of_questions);
+        correct_answers = findViewById(R.id.correct_answers);
+        wrong_answers = findViewById(R.id.wrong_answers);
 
         final ArrayList<com.codeelit.ts.model.question> myList = (ArrayList<question>) getIntent().getSerializableExtra("question");
         final ArrayList<ResultCategoryList> correct_category = (ArrayList<ResultCategoryList>) getIntent().getSerializableExtra("right_category");
@@ -79,6 +72,7 @@ public class Result extends AppCompatActivity {
         explain.setText(myList.get(0).getAnswer());
         right.setText("Correct " + score);
         noofq.setText("out of" + noof);*/
+
       for(int i =0;i<myList.size();i++){
           Log.e("Nodolo", "onEverting: " + myList.get(i).getQuestion());
           Log.e("Nodolo", "onEverting: " + myList.get(i).getOpt_A());
@@ -102,7 +96,6 @@ public class Result extends AppCompatActivity {
         recyclerView_correct.setAdapter(adapter);
 
 
-
        /* List pieData = new ArrayList<>();
 
         pieData.add(new SliceValue(noof-score, Color.rgb(200,0,25)).setLabel("Wrong Answers"));
@@ -114,6 +107,16 @@ public class Result extends AppCompatActivity {
         pieChartData.setHasCenterCircle(true).setCenterText1(((score/noof)*100)+"%  "+"Well Done").setCenterText1FontSize(20).setCenterText1Color(Color.parseColor("#0097A7"));
         pieChartView.setPieChartData(pieChartData);*/
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

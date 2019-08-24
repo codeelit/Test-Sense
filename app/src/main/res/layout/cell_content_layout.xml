@@ -16,6 +16,7 @@
         android:visibility="visible">
 
         <RelativeLayout
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -27,7 +28,7 @@
                 android:layout_alignParentTop="true"
                 android:cropToPadding="false"
                 android:scaleType="matrix"
-                android:src="@color/colorPrimary"
+                android:background="@color/night_300"
                 android:visibility="visible" />
         </RelativeLayout>
 

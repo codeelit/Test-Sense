@@ -35,6 +35,7 @@
                 android:layout_width="148dp"
                 android:layout_height="110dp"
                 android:alpha="0.6"
+                android:background="@color/night_300"
                 android:orientation="vertical"
                 app:srcCompat="@drawable/shadow_up" />
         </RelativeLayout>

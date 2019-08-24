@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="3dp"
+    app:cardCornerRadius="4dp"
     android:elevation="3dp"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
-        android:padding="16dp"
+        android:padding="6dp"
         android:gravity="center_vertical"
         android:background="@color/night_300"
         android:layout_marginLeft="10dp"
@@ -26,8 +26,8 @@
         <TextView
             android:id="@+id/wrong_list_answer"
             android:text="Title"
-            android:gravity="center"
-            android:textSize="22sp"
+            android:gravity="start"
+            android:textSize="18sp"
             android:textColor="#fff"
             android:textStyle="bold"
             android:fontFamily="@font/fibra_one_bold"
