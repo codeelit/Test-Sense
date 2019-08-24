@@ -4,16 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codeelit.ts.ShowAnswer.ShowAnswers;
 import com.codeelit.ts.model.ResultCategoryList;
 import com.codeelit.ts.model.question;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 import java.util.ArrayList;
@@ -31,44 +38,65 @@ public class Result extends AppCompatActivity {
     TextView right;
     ListView listView;
     PieChartView pieChartView;
+    Button mShowAnswer;
     private ArrayList<ResultCategoryList> m_correct_list = new ArrayList<>();
 
     RecyclerView recyclerView_correct;
     RecyclerView recyclerView_wrong;
     ResultCategoryAdapter resultCategoryAdapter;
 
+    private DatabaseReference mDatabase;
+    private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        auth = FirebaseAuth.getInstance();
 
-        recyclerView_correct = (RecyclerView)findViewById(R.id.recyclerView_right);
+        recyclerView_correct = (RecyclerView) findViewById(R.id.recyclerView_right);
+        mShowAnswer = findViewById(R.id.show_answers);
 
-
-
-
-
-        ArrayList<com.codeelit.ts.model.question> myList = (ArrayList<question>) getIntent().getSerializableExtra("question");
-        ArrayList<ResultCategoryList> correct_category = (ArrayList<ResultCategoryList>) getIntent().getSerializableExtra("right_category");
-        ArrayList<ResultCategoryList> wrong_category = (ArrayList<ResultCategoryList>) getIntent().getSerializableExtra("wrong_category");
+        final ArrayList<com.codeelit.ts.model.question> myList = (ArrayList<question>) getIntent().getSerializableExtra("question");
+        final ArrayList<ResultCategoryList> correct_category = (ArrayList<ResultCategoryList>) getIntent().getSerializableExtra("right_category");
+        final ArrayList<ResultCategoryList> wrong_category = (ArrayList<ResultCategoryList>) getIntent().getSerializableExtra("wrong_category");
 
         int score = (int) getIntent().getIntExtra("no_of_right_answer", 0);
         int noof = (int) getIntent().getIntExtra("no_of_question", 0);
+
+        mShowAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Result.this, ShowAnswers.class);
+                intent.putExtra("questions", myList);
+                startActivity(intent);
+
+            }
+        });
 
       /*  question.setText(myList.get(0).getQuestion());
         explain.setText(myList.get(0).getAnswer());
         right.setText("Correct " + score);
         noofq.setText("out of" + noof);*/
+      for(int i =0;i<myList.size();i++){
+          Log.e("Nodolo", "onEverting: " + myList.get(i).getQuestion());
+          Log.e("Nodolo", "onEverting: " + myList.get(i).getOpt_A());
+          Log.e("Nodolo", "onEverting: " + myList.get(i).getOpt_B());
+          Log.e("Nodolo", "onEverting: " + myList.get(i).getOpt_C());
+          Log.e("Nodolo", "onEverting: " + myList.get(i).getOpt_D());
 
-        for (int i =0; i<correct_category.size();i++){
+      }
+
+        for (int i = 0; i < correct_category.size(); i++) {
             /*Toast.makeText(this,"correct category"+correct_category.get(i),Toast.LENGTH_SHORT).show();*/
-            Log.e("Nodo", "onCorrrect: "+correct_category.get(i).getCategory());
+            Log.e("Nodo", "onCorrrect: " + correct_category.get(i).getCategory());
         }
-        for (int i =0; i<wrong_category.size();i++){
+        for (int i = 0; i < wrong_category.size(); i++) {
             /*Toast.makeText(this,"correct category"+correct_category.get(i),Toast.LENGTH_SHORT).show();*/
-            Log.e("Nodo", "onWrong "+wrong_category.get(i).getCategory());
+            Log.e("Nodo", "onWrong " + wrong_category.get(i).getCategory());
         }
-        ResultCategoryAdapter adapter = new ResultCategoryAdapter(this,wrong_category);
+        ResultCategoryAdapter adapter = new ResultCategoryAdapter(this, wrong_category);
         recyclerView_correct.setHasFixedSize(true);
         recyclerView_correct.setLayoutManager(new LinearLayoutManager(this));
         recyclerView_correct.setAdapter(adapter);
