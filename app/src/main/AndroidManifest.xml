@@ -31,6 +31,7 @@
         <activity android:name=".LoginDetails.PWresetActivity" />
         <activity android:name=".Dummy" />
         <activity android:name=".AttemptTest" />
+        <activity android:name=".ShowAnswer.ShowAnswers"/>
     </application>
 
 </manifest>
