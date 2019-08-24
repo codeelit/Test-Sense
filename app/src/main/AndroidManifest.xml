@@ -32,6 +32,8 @@
         <activity android:name=".Dummy" />
         <activity android:name=".AttemptTest" />
         <activity android:name=".ShowAnswer.ShowAnswers"/>
+        <activity android:name=".Learn.LearnCategory.BasicAptitude"/>
+        <activity android:name=".Learn.LearnCategory.DescriptionActivity"/>
     </application>
 
 </manifest>

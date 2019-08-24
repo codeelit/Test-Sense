@@ -72,7 +72,9 @@ public class AttemptTest extends AppCompatActivity {
         scrollView = findViewById(R.id.discrete);
         final QuestionAdapter questionAdapter = new QuestionAdapter(questions);
         scrollView.setAdapter(questionAdapter);
-
+        for (int i=0;i<questions.size();i++){
+            Log.e("Nodama", "fine "+questions.get(i).getAnswer() );
+        }
         next = findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             @Override

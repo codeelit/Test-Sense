@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".Result">
 
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,30 +41,35 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/loltext"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       >
-<TextView
-    android:id="@+id/loltext"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Need Improvements in"
-    android:layout_marginBottom="20dp"
-    />
+        android:text="Need Improvements in" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_right"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="@+id/loltext">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         </androidx.recyclerview.widget.RecyclerView>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_percentage"
@@ -79,5 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Show Answers" />
+
+    </LinearLayout>
 
 </LinearLayout>

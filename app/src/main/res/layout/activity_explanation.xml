@@ -29,7 +29,7 @@
 
             <com.yarolegovich.discretescrollview.DiscreteScrollView
                 android:id="@+id/ediscrete"
-
+                android:layout_marginTop="-120dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:dsv_orientation="horizontal" />

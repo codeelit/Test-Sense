@@ -37,10 +37,11 @@ public class DescriptionActivity extends AppCompatActivity {
             String url = "file:///android_asset/" +data+ ".html";
             webView.loadUrl(url);
 
-            WebSettings webSettings = webView.getSettings();
-            webSettings.setBuiltInZoomControls(true);
-            webSettings.setDisplayZoomControls(false);
-            webSettings.setJavaScriptEnabled(true);
+            WebSettings web = webView.getSettings();
+            web.setBuiltInZoomControls(true);
+            web.setDisplayZoomControls(false);
+            web.setJavaScriptEnabled(true);
+            
 
             @SuppressLint("WrongConstant")
             ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService("connectivity");
